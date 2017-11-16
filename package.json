@@ -5,7 +5,6 @@
   "main": "server.js",
   "scripts": {
     "start": "npm install && node server.js"
-    // "postinstall": "node server.js"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
