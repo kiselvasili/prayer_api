@@ -4,8 +4,8 @@
   "description": "A sample Node.js app using Express 4",
   "main": "server.js",
   "scripts": {
-    "start": "npm install",
-    "postinstall": "node server.js"
+    "start": "npm install && node server.js"
+    // "postinstall": "node server.js"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
