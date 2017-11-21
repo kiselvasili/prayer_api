@@ -7,6 +7,6 @@ let requireAuth= passport.authenticate('jwt', {session: false});
 let requireLogin = passport.authenticate('local', {session: false});
 
 router.post('/register', AuthenticationController.register);
-router.post('/login', requireLogin, AuthenticationController.login);
+router.post('/login', AuthenticationController.login);
 
 module.exports = router;

@@ -16,10 +16,11 @@ let setUserInfo = (request) => {
 };
 
 exports.login = (req, res, next) => {
+    console.log(req.body);
     let userInfo = setUserInfo(req.user);
 
     res.status(200).json({
-        toketn: `JWT ${generateToken(userInfo)}`,
+        token: `JWT ${generateToken(userInfo)}`,
         user: userInfo
     });
 };
@@ -59,7 +60,7 @@ exports.register = (req, res, next) => {
             var userInfo = setUserInfo(user);
 
             res.status(201).json({
-                token: `JWT ${generateToken(userInfo)}`,
+                // token: `JWT ${generateToken(userInfo)}`,
                 user: userInfo
             });
         });
