@@ -4,8 +4,12 @@ import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import * as mongoose from 'mongoose';
 
+import BaseRouter from './routes';
+import Auth from './core/auth';
+
+import { handleError } from './core/errorHandler';
 import * as databaseConfig from '../config/database';
-import * as api from '../app/routes';
+// import * as api from '../app/routes';
 
 class Server {
     public app: express.Application;
@@ -15,6 +19,8 @@ class Server {
         mongoose.connect(databaseConfig.url);
         this.initConfig();
         this.start();
+        this.initAuth();
+        this.initRoutes();
     }
 
     private initConfig() {
@@ -23,7 +29,23 @@ class Server {
         this.app.use(morgan('dev'));
         this.app.use(cors());
 
-        this.app.use('/api', api);
+        // this.app.use('/api', api);
+    }
+
+    private initAuth() {
+        new Auth().init(this.app);
+    }
+
+    private initRoutes() {
+        this.app.use('/api', BaseRouter);
+
+        this.app.use((err: any, req: any, res: any, next: any) => {
+            if (!next) {
+                handleError(err, res);
+            }
+
+            next(err, req, res);
+        });
     }
 
     private start() {
